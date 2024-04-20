@@ -24,7 +24,24 @@ class _LoginPageState extends State<LoginPage> {
 
     //try sign in
     try{
-      await _authService.signInWithEmailPassword(emailController.text, passwordController.text,);
+      final userCreds = await _authService.signInWithEmailPassword(emailController.text, passwordController.text,);
+     
+        if(userCreds !=null){
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const HomePage()),
+              );
+            
+        }
+        else{
+          showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text("Something went wrong"),
+          ),
+        );
+        }
     }
    
    //display any errors

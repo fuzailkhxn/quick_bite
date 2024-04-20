@@ -41,12 +41,12 @@ class _FoodPageState extends State<FoodPage> {
       children: [
         //scaffold  ui
         Scaffold(
-          appBar: AppBar(),
+          // appBar: AppBar(),
           body: SingleChildScrollView(
             child: Column(
               children: [
                 //food  image
-                Image.asset(widget.food.imagePath),
+                Image.asset(widget.food.imagePath,width: MediaQuery.of(context).size.width,height: 340,fit: BoxFit.cover,),
 
                 Padding(
                   padding: const EdgeInsets.all(25.0),

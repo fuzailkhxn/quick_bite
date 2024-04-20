@@ -65,50 +65,56 @@ class _PaymentPageState extends State<PaymentPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+  
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         foregroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text("Checkout"),
       ),
-      body: Column(
-        children: [
-          //credit card
-          CreditCardWidget(
-            cardNumber: cardNumber,
-            expiryDate: expiryDate,
-            cardHolderName: cardHolderName,
-            cvvCode: cvvCode,
-            showBackView: isCvvFocused,
-            onCreditCardWidgetChange: (p0) {},
-          ),
-
-          //credit card form
-          CreditCardForm(
-            cardNumber: cardNumber,
-            expiryDate: expiryDate,
-            cardHolderName: cardHolderName,
-            cvvCode: cvvCode,
-            onCreditCardModelChange: (data) {
-              setState(() {
-                cardNumber = data.cardNumber;
-                expiryDate = data.expiryDate;
-                cardHolderName = data.cardHolderName;
-                cvvCode = data.cvvCode;
-              });
-            },
-            formKey: formKey,
-          ),
-
-          const Spacer(),
-
-          MyButton(
-            onTap: () {},
-            text: "Pay now",
-          ),
-
-          const SizedBox(height: 25),
-        ],
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Column(
+          children: [
+        
+            CreditCardWidget(
+                          cardNumber: cardNumber,
+                          expiryDate: expiryDate,
+                          cardHolderName: cardHolderName,
+                          cvvCode: cvvCode,
+                          showBackView: isCvvFocused,
+                          onCreditCardWidgetChange: (p0) {},
+                        ),
+              
+                        //credit card form
+                        CreditCardForm(
+                          cardNumber: cardNumber,
+                          expiryDate: expiryDate,
+                          cardHolderName: cardHolderName,
+                          cvvCode: cvvCode,
+                          onCreditCardModelChange: (data) {
+            setState(() {
+              cardNumber = data.cardNumber;
+              expiryDate = data.expiryDate;
+              cardHolderName = data.cardHolderName;
+              cvvCode = data.cvvCode;
+            });
+                          },
+                          formKey: formKey,
+                        ),
+            //credit card
+        
+           const SizedBox(height: 25),
+            MyButton(
+              onTap: () {
+                userTappedPay(context);
+              },
+              text: "Pay now",
+            ),
+        
+            const SizedBox(height: 25),
+          ],
+        ),
       ),
     );
   }

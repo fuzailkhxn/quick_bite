@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:quick_bite/components/my_button.dart';
 import 'package:quick_bite/components/my_textfield.dart';
+import 'package:quick_bite/pages/home_page.dart';
 import 'package:quick_bite/services/auth/auth_service.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -28,10 +29,27 @@ class _RegisterPageState extends State<RegisterPage> {
     if (passwordController.text == confirmPasswordController.text) {
       //try creating user
       try {
-        await _authService.signInWithEmailPassword(
+      final userCreds =  await _authService.signUpWithEmailPassword(
           emailController.text,
           passwordController.text,
         );
+
+        if(userCreds !=null){
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const HomePage()),
+              );
+            
+        }
+        else{
+          showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text("Something went wrong"),
+          ),
+        );
+        }
       }
 
       //display any errors
@@ -105,7 +123,9 @@ class _RegisterPageState extends State<RegisterPage> {
                 const SizedBox(height: 25),
                 MyButton(
                   text: "Sign Up",
-                  onTap: () {},
+                  onTap: () {
+                    register();
+                  },
                 ),
                 const SizedBox(height: 25),
                 Row(

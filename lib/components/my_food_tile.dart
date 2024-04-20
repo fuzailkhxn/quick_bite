@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:quick_bite/models/food.dart';
@@ -20,6 +21,7 @@ class FoodTile extends StatelessWidget {
               children: [
                 //text food details
                 Expanded(
+                flex: 7,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -44,9 +46,12 @@ class FoodTile extends StatelessWidget {
                 const SizedBox(height: 15),
 
                 //food image
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
-                  child: Image.asset(food.imagePath, height: 120),
+                Expanded(
+                  flex: 3,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: Image.asset(food.imagePath, height: 120,fit: BoxFit.cover,),
+                  ),
                 ),
               ],
             ),

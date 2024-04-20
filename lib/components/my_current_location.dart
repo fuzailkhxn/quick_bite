@@ -61,11 +61,13 @@ class MyCurrentLocation extends StatelessWidget {
               children: [
                 // address
                 Consumer<Restaurant>(
-                  builder: (context, restaurant, child) => Text(
-                    restaurant.deliveryAddress,
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.inversePrimary,
-                      fontWeight: FontWeight.bold,
+                  builder: (context, restaurant, child) => Expanded(
+                    child: Text(
+                      restaurant.deliveryAddress,
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.inversePrimary,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),

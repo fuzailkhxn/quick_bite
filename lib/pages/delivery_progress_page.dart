@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:provider/provider.dart';
 import 'package:quick_bite/components/my_receipt.dart';
 import 'package:quick_bite/models/restaurant.dart';
@@ -23,6 +24,11 @@ class _DeliveryProgressPageState extends State<DeliveryProgressPage> {
     String receipt =context.read<Restaurant>().displayCartReceipt();
     db.saveOrderToDatabase(receipt);
   }
+
+  _callNumber() async{
+  const number = '9167861331'; //set the number here
+  final res = await FlutterPhoneDirectCaller.callNumber(number);
+}
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +112,6 @@ class _DeliveryProgressPageState extends State<DeliveryProgressPage> {
               ),
 
               const SizedBox(width: 10),
-
               //call button
               Container(
                 decoration: BoxDecoration(
@@ -114,7 +119,9 @@ class _DeliveryProgressPageState extends State<DeliveryProgressPage> {
                   shape: BoxShape.circle,
                 ),
                 child: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    _callNumber();
+                  },
                   icon: const Icon(Icons.call),
                   color: Colors.green,
                 ),
